@@ -137,15 +137,76 @@ public class CodilityPlayGround {
         return fixHole;
     }
 
+    public static int removeDuplicatesFromSortedArray2(int[] nums) {
+        int j = 1;
+        int n = nums.length;
+        int count = 1;
+        for(int i = 1; i < n; i++) {
+            if( nums[i] == nums[i-1] && count < 2) {
+                nums[j] = nums[i];
+                count++;
+                j++;
+            } else if(nums[i] != nums[i-1]){
+                count = 1;
+                nums[j] =nums[i];
+                j++;
+            }
 
+        }
+        return j;
+    }
+
+    public static boolean isPalindrome(String s) {
+        String alphanumeric = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        System.out.println(alphanumeric);
+        if (alphanumeric.length() == 0 ) return true;
+        char[] charArray = alphanumeric.toCharArray();
+        int n = charArray.length;
+        int endIndex = n-1;
+        for (int i = 0 ; i < n/2; i++){
+            if(charArray[i] != charArray[endIndex]){
+                return false;
+            }
+            endIndex--;
+        }
+        return true;
+    }
+    public static boolean isPalindromee(String s) {
+        if (s.isEmpty()) {
+            return true;
+        }
+        int start = 0;
+        int last = s.length() - 1;
+        while(start <= last) {
+            char currFirst = s.charAt(start);
+            char currLast = s.charAt(last);
+            if (!Character.isLetterOrDigit(currFirst )) {
+                start++;
+            } else if(!Character.isLetterOrDigit(currLast)) {
+                last--;
+            } else {
+                if (Character.toLowerCase(currFirst) != Character.toLowerCase(currLast)) {
+                    return false;
+                }
+                start++;
+                last--;
+            }
+        }
+        return true;
+    }
     public static void main(String [] args){
-//        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
-//        String person1 = "fred";
-//        String person2 = "bill";
+        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
+        String person1 = "fred";
+        String person2 = "bill";
+        int nums[]= {1,1,1,2,2,3};
+        String result = "0P";
+//        System.out.print(isPalindrome(result));
+        System.out.print(isPalindromee(result));
+//        System.out.println(removeDuplicatesFromSortedArray2(nums));
 //        int result = degreesOfSeparation(connections, person1, person2);
 //        System.out.println(calculateCastles(new int[]{2, 2, 3, 4, 3, 3, 2, 2, 1, 1, 2, 5}));
 //        System.out.println(fixPotholes("...xxx..x....xxx",7)); //5
 //        System.out.println(fixPotholes("..xxxxx",4)); // 3
-        System.out.println(fixPotholes("...",14)); // 0
+//        System.out.println(fixPotholes("...",14)); // 0
     }
 }
