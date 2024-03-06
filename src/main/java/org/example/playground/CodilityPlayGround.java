@@ -155,23 +155,7 @@ public class CodilityPlayGround {
         }
         return j;
     }
-
     public static boolean isPalindrome(String s) {
-        String alphanumeric = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        System.out.println(alphanumeric);
-        if (alphanumeric.length() == 0 ) return true;
-        char[] charArray = alphanumeric.toCharArray();
-        int n = charArray.length;
-        int endIndex = n-1;
-        for (int i = 0 ; i < n/2; i++){
-            if(charArray[i] != charArray[endIndex]){
-                return false;
-            }
-            endIndex--;
-        }
-        return true;
-    }
-    public static boolean isPalindromee(String s) {
         if (s.isEmpty()) {
             return true;
         }
@@ -194,6 +178,24 @@ public class CodilityPlayGround {
         }
         return true;
     }
+    // https://leetcode.com/problems/longest-substring-without-repeating-characters/?envType=study-plan-v2&envId=top-interview-150
+    public int lengthOfLongestSubstring(String s) {
+        int leftPointer = 0, rightPointer = 0, longestLength = 0;
+        boolean[] visitedChar = new boolean[256];
+
+        while(rightPointer < s.length()){
+            if(visitedChar[s.charAt(rightPointer)]){
+                while(visitedChar[s.charAt(rightPointer)]){
+                    visitedChar[s.charAt(leftPointer)] = false;
+                    leftPointer++;
+                }
+            }
+            visitedChar[s.charAt(rightPointer)] = true;
+            longestLength = Math.max(longestLength, (rightPointer - leftPointer) + 1);
+            rightPointer++;
+        }
+        return longestLength;
+    }
     public static void main(String [] args){
         String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
         String person1 = "fred";
@@ -201,7 +203,7 @@ public class CodilityPlayGround {
         int nums[]= {1,1,1,2,2,3};
         String result = "0P";
 //        System.out.print(isPalindrome(result));
-        System.out.print(isPalindromee(result));
+          System.out.print(isPalindrome(result));
 //        System.out.println(removeDuplicatesFromSortedArray2(nums));
 //        int result = degreesOfSeparation(connections, person1, person2);
 //        System.out.println(calculateCastles(new int[]{2, 2, 3, 4, 3, 3, 2, 2, 1, 1, 2, 5}));
