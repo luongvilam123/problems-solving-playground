@@ -202,7 +202,7 @@ public class CodilityPlayGround {
         String person2 = "bill";
         int nums[]= {1,1,1,2,2,3};
         String result = "0P";
-//        System.out.print(isPalindrome(result));
+        System.out.print(isPalindrome(result));
           System.out.print(isPalindrome(result));
 //        System.out.println(removeDuplicatesFromSortedArray2(nums));
 //        int result = degreesOfSeparation(connections, person1, person2);
