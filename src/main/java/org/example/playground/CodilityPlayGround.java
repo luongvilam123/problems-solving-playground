@@ -196,6 +196,18 @@ public class CodilityPlayGround {
         }
         return longestLength;
     }
+//    https://leetcode.com/problems/is-subsequence/?envType=study-plan-v2&envId=top-interview-150
+    public boolean isSubsequence(String s, String t) {
+        int left = 0, right = 0, valid = 0;
+        while(left < s.length() && right < t.length()){
+            if(s.charAt(left) == t.charAt(right)){
+                valid++;
+                left++;
+            }
+            right++;
+        }
+        return s.length() == valid;
+    }
     public static void main(String [] args){
         String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
         String person1 = "fred";
