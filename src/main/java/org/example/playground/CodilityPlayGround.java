@@ -353,6 +353,21 @@ public class CodilityPlayGround {
 
     //https://leetcode.com/problems/valid-sudoku/description/
     public boolean isValidSudoku(char[][] board) {
+        HashSet<Object> hashSet = new HashSet<>();
+        for (int i = 0; i < 9 ; i++) {
+            for (int j = 0; j < 9 ; j++){
+                // Get the current char in Sudoku Board
+                char currentBoard = board[i][j];
+                // If the current char is empty, continue to the next element
+                if (currentBoard == '.') continue;
+                // Check if the element in the row is unique
+                if(!hashSet.add(currentBoard + "row" + i )) return false;
+                // Check if the element in the col is unique
+                if(!hashSet.add(currentBoard + "col" + j)) return false;
+                // Check if the element in each square box is unique
+                if(!hashSet.add(currentBoard + "square" + i/3 + "-" + j/3)) return false;
+            }
+        }
         return true;
     }
     public static void main(String [] args){
