@@ -1,6 +1,7 @@
 package org.example.playground;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CodilityPlayGround {
 
@@ -370,6 +371,30 @@ public class CodilityPlayGround {
         }
         return true;
     }
+
+    //https://neetcode.io/problems/longest-consecutive-sequence
+    public int longestConsecutive(int[] nums) {
+        // Add array elements to Set for checking contains number
+        Set<Integer> hashSet = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+        // longest consecutive length
+        int result = 0;
+
+        for (Integer num : hashSet) {
+            // init consecutive length
+            int length = 0;
+            // if the current number do not have the previous value
+            // contains in Set then it is the beginning of a consecutive length => increase length by one
+            if (hashSet.contains(num -1)) length ++;
+            // if the current number have the next number value in Set then increase the length by one
+            while(hashSet.contains(num + length)){
+                length = length + 1;
+            }
+            // Get the longest consecutive length by Max
+            result = Math.max(length,result);
+        }
+        return result;
+    }
+
     public static void main(String [] args){
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
 //        String person1 = "fred";
