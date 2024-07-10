@@ -396,6 +396,25 @@ public class CodilityPlayGround {
         return result;
     }
 
+    //https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+    public int[] twoSum(int[] numbers, int target) {
+        if(numbers.length == 0) return new int[]{};
+       int left = 0;
+       int right = numbers.length - 1;
+       while (left < right){
+           if( numbers[left] + numbers[right] == target){
+               return new int[]{left+1,right+1};
+               // check if the sum is greater than target -> shifting the right pointer to the left
+           } else if(numbers[left] + numbers[right] > target){
+               right--;
+           } else {
+               // if the sum is smaller than target -> shifting the left pointer to the right
+               left ++;
+           }
+       }
+        return new int[]{};
+    }
+
     public static void main(String [] args){
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
 //        String person1 = "fred";
