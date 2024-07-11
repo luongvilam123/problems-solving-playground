@@ -415,6 +415,10 @@ public class CodilityPlayGround {
         return new int[]{};
     }
 
+    //https://leetcode.com/problems/3sum/description/
+    public List<List<Integer>> threeSum(int[] nums) {
+        return null;
+    }
     public static void main(String [] args){
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
 //        String person1 = "fred";
