@@ -417,18 +417,30 @@ public class CodilityPlayGround {
 
     //https://leetcode.com/problems/3sum/description/
     public static List<List<Integer>> threeSum(int[] nums) {
+        // Create result to contain all the triplets and
+        // sort the array for the increase and decrease left and right pointers
         List<List<Integer>> result = new ArrayList<>();
-        Set<Integer> checkDuplicate = new HashSet<>();
         Arrays.sort(nums);
+        // loop through the elements
         for(int i = 0; i < nums.length; i++){
-            if(checkDuplicate.add(nums[i])) continue;
-            int currentNum = nums[i];
+            // Check if the first value i is duplicate, continue to the next element
+            if( i > 0 && nums[i] == nums[i-1]) continue;
+            // Create left and right pointers
             int left = i + 1;
             int right = nums.length -1;
+            // loop through array and move left and right pointers
             while (left < right) {
-                if (currentNum + nums[left] + nums[right] == 0) {
-                    result.add(new ArrayList<>(Arrays.asList(currentNum, nums[left], nums[right])));
-                } else if (currentNum + nums[left] + nums[right] > 0) {
+                // Init sum value of the triplet
+                int totalSum = nums[i] + nums[left] + nums[right];
+
+                if (totalSum == 0) {
+                    // if three element is matched with the condition -> at the triplet to the result
+                    result.add(new ArrayList<>(Arrays.asList(nums[i], nums[left], nums[right])));
+                    // if there is duplicate element when moving left pointer, move left pointer to next element
+                    // if we founded the target triplet, move left pointer to the next element
+                    do left++;
+                    while (left < right && nums[left] == nums[left - 1]);
+                } else if (totalSum > 0) {
                     right--;
                 } else {
                     left++;
@@ -458,7 +470,5 @@ public class CodilityPlayGround {
 //        System.out.println(fixPotholes("...",14)); // 0
 //        System.out.println(isAnagram("rat","cat"));
 //        System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
-        List<List<Integer>> result = CodilityPlayGround.threeSum(new int[]{-3,3,4,-3,1,2});
-        result.get(0).forEach(System.out::println);
     }
 }
