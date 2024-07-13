@@ -416,11 +416,28 @@ public class CodilityPlayGround {
     }
 
     //https://leetcode.com/problems/3sum/description/
-    public List<List<Integer>> threeSum(int[] nums) {
-        return null;
-
-    }
-    public static void main(String [] args){
+    public static List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Set<Integer> checkDuplicate = new HashSet<>();
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length; i++){
+            if(checkDuplicate.add(nums[i])) continue;
+            int currentNum = nums[i];
+            int left = i + 1;
+            int right = nums.length -1;
+            while (left < right) {
+                if (currentNum + nums[left] + nums[right] == 0) {
+                    result.add(new ArrayList<>(Arrays.asList(currentNum, nums[left], nums[right])));
+                } else if (currentNum + nums[left] + nums[right] > 0) {
+                    right--;
+                } else {
+                    left++;
+                }
+            }
+        }
+        return result;
+        }
+    public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
 //        String person1 = "fred";
 //        String person2 = "bill";
@@ -440,6 +457,8 @@ public class CodilityPlayGround {
 //        System.out.println(fixPotholes("..xxxxx",4)); // 3
 //        System.out.println(fixPotholes("...",14)); // 0
 //        System.out.println(isAnagram("rat","cat"));
-        System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
+//        System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
+        List<List<Integer>> result = CodilityPlayGround.threeSum(new int[]{-3,3,4,-3,1,2});
+        result.get(0).forEach(System.out::println);
     }
 }
