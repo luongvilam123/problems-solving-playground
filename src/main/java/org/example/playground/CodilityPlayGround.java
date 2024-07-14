@@ -449,6 +449,11 @@ public class CodilityPlayGround {
         }
         return result;
         }
+
+    //https://leetcode.com/problems/container-with-most-water/description/
+    public int maxArea(int[] height) {
+        return 1;
+    }
     public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
 //        String person1 = "fred";
