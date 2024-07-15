@@ -452,7 +452,24 @@ public class CodilityPlayGround {
 
     //https://leetcode.com/problems/container-with-most-water/description/
     public int maxArea(int[] height) {
-        return 1;
+        int result = 0;
+        //Init left = 0 and right = length -1 pointers because we want the maximum length of the y-axis
+        int left = 0;
+        int right = height.length -1;
+
+        while(left < right) {
+            // get the height (x-axis) of the pointer
+            int leftHeight = height[left];
+            int rightHeight = height[right];
+            // Calculate the max area
+            int area = ( right - left ) * Math.min(leftHeight,rightHeight);
+            // area is max then replace it with result
+            if(area > result) result = area;
+            // if the height (x-axis) of the pointer that is higher than the other because we want the area to be max
+            if(leftHeight < rightHeight) left++;
+            else right --;
+        }
+        return result;
     }
     public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
@@ -461,14 +478,12 @@ public class CodilityPlayGround {
 //        int nums[]= {1,1,1,2,2,3};
 //        String result = "0P";
 //        System.out.print(isPalindrome(result));
-//        System.out.print(isPalindrome(result));
 //        findKthLargest(new int[]{3, 2, 1, 5, 6, 4},2);
 //        System.out.print(longestCommonPrefix(new String []{"adc", "ac","accd"}));
 //        System.out.println(removeDuplicatesFromSortedArray2(nums));
 //        int result = degreesOfSeparation(connections, person1, person2);
 //          String[] rowDatas = {"1,Ben,0","2,Kate,1","3,Damien,2","4,Jane,1","5,Meng,4"};
 //          printOrganizeChart(rowDatas);
-//        System.out.println("=========>"+result);
 //        System.out.println(calculateCastles(new int[]{2, 2, 3, 4, 3, 3, 2, 2, 1, 1, 2, 5}));
 //        System.out.println(fixPotholes("...xxx..x....xxx",7)); //5
 //        System.out.println(fixPotholes("..xxxxx",4)); // 3
