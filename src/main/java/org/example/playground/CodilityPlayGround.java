@@ -464,7 +464,7 @@ public class CodilityPlayGround {
             // Calculate the max area
             int area = ( right - left ) * Math.min(leftHeight,rightHeight);
             // area is max then replace it with result
-            if(area > result) result = area;
+            result = Math.max(result,area);
             // if the height (x-axis) of the pointer that is higher than the other because we want the area to be max
             if(leftHeight < rightHeight) left++;
             else right --;
