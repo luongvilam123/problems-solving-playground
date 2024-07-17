@@ -473,6 +473,8 @@ public class CodilityPlayGround {
     }
     //https://leetcode.com/problems/trapping-rain-water/
     public int trap(int[] height) {
+        int left = 0, right = height.length - 1;
+
         return 1;
     }
 
