@@ -474,18 +474,24 @@ public class CodilityPlayGround {
     //https://leetcode.com/problems/trapping-rain-water/
     public int trap(int[] height) {
         int result = 0;
+        // init two pointers left and right
         int left = 0, right = height.length - 1;
+        // Get the max value of the current pointer left and right
         int maxLeft = height[left];
         int maxRight = height[right];
 
         while(left < right) {
+            // we move the pointer if the pointer value of left is min
             if( maxLeft < maxRight) {
                 left++;
                 maxLeft = Math.max(maxLeft,height[left]);
+                // calculate the trap water using this formula : maxLeft - height[left]
                 result = result + ( maxLeft - height[left] );
+                // we move the pointer if the pointer value of right is min
             } else {
                 right--;
                 maxRight = Math.max(maxRight,height[right]);
+                // calculate the trap water using this formula : maxRight - height[right]
                 result += maxRight -height[right];
             }
         }
