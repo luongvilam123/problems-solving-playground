@@ -498,6 +498,30 @@ public class CodilityPlayGround {
         return result;
     }
 
+    public boolean isValid(String s) {
+        Stack<Character> parentheses = new Stack<Character>();
+        if(s.length() == 1) return false;
+        for(int i = 0 ; i < s.length(); i++){
+            if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '['){
+                parentheses.push(s.charAt(i));
+            } else {
+                if(parentheses.empty()) return !parentheses.empty();
+                else {
+                    Character topChar = parentheses.peek();
+                    if (s.charAt(i) == ')' && topChar == '(')
+                        parentheses.pop();
+                    else if (s.charAt(i) == ']' && topChar == '[')
+                        parentheses.pop();
+                    else if (s.charAt(i) == '}' && topChar == '{')
+                        parentheses.pop();
+                    else
+                        parentheses.push(s.charAt(i));
+                }
+            }
+        }
+        return parentheses.empty();
+    }
+
     public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
 //        String person1 = "fred";
