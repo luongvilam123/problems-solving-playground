@@ -498,6 +498,7 @@ public class CodilityPlayGround {
         return result;
     }
 
+//    https://leetcode.com/problems/valid-parentheses/
     public boolean isValid(String s) {
         Stack<Character> parentheses = new Stack<Character>();
         if(s.length() == 1) return false;
