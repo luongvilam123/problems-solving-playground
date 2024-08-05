@@ -1,7 +1,7 @@
 package org.example.playground;
 
 import java.util.Stack;
-
+//https://leetcode.com/problems/min-stack/
 class MinStack {
     Stack<Integer> stack;
     Stack<Integer> minStack;

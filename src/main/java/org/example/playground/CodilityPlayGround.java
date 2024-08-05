@@ -522,6 +522,35 @@ public class CodilityPlayGround {
         }
         return parentheses.empty();
     }
+    // https://leetcode.com/problems/evaluate-reverse-polish-notation/
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> numbers = new Stack<>();
+        // loop through all characters
+        int length = tokens.length;
+        for (String token : tokens) {
+            switch (token) {
+                case "+":
+                    numbers.push(numbers.pop() + numbers.pop());
+                    break;
+                case "-":
+                    int a = numbers.pop();
+                    int b = numbers.pop();
+                    numbers.push(b - a);
+                    break;
+                case "*":
+                    numbers.push(numbers.pop() * numbers.pop());
+                    break;
+                case "/":
+                    int c = numbers.pop();
+                    int d = numbers.pop();
+                    numbers.push(d / c);
+                    break;
+                default:
+                    numbers.push(Integer.parseInt(token));
+            }
+        }
+    return numbers.peek();
+    }
 
     public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
