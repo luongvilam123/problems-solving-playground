@@ -551,6 +551,27 @@ public class CodilityPlayGround {
         }
     return numbers.peek();
     }
+    //https://leetcode.com/problems/generate-parentheses/
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        backTracking(result,0,0,"",n);
+        return result;
+    }
+    private void backTracking(List<String> result, int open, int close, String s, int n){
+        // if the solution length is meet the condition, return the result list
+        if(s.length() == 2*n){
+            result.add(s);
+            return;
+        }
+        // if the open parenthesis is available and valid, we add it
+        if(open < n){
+            backTracking(result,open + 1, close,s + '(',n);
+        }
+        // if the close parenthesis is available and valid, we add it
+        if(close < open){
+            backTracking(result,open,close + 1,s + ')',n);
+        }
+    }
 
     public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
