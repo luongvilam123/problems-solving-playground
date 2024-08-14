@@ -573,6 +573,40 @@ public class CodilityPlayGround {
         }
     }
 
+    // https://leetcode.com/problems/daily-temperatures/description/
+    public int[] dailyTemperatures(int[] temperatures) {
+        int [] result = new int[temperatures.length];
+        Arrays.fill(result,-1);
+        for(int i = 0 ; i < temperatures.length ; i++){
+            int j = i + 1;
+            while( j < temperatures.length ){
+                if( temperatures[i] < temperatures[j] ){
+                    result[i] = j - i;
+                    break;
+                } else{
+                    j++;
+                }
+            }
+            if(result[i] == -1) result[i] = 0;
+        }
+        return result;
+    }
+
+    public static int[] dailyTemperaturess(int[] temperatures) {
+        int[] result = new int[temperatures.length];
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                int index = stack.pop();
+                result[index] = i - index;
+            }
+            stack.push(i);
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
 //        String person1 = "fred";
@@ -592,5 +626,7 @@ public class CodilityPlayGround {
 //        System.out.println(fixPotholes("...",14)); // 0
 //        System.out.println(isAnagram("rat","cat"));
 //        System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
+        dailyTemperaturess(new int[]{30,40,50,60});
+        System.out.println(true && true);
     }
 }
