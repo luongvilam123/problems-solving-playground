@@ -606,6 +606,34 @@ public class CodilityPlayGround {
 
         return result;
     }
+    // https://leetcode.com/problems/number-of-islands/
+    public int numIslands(char[][] grid) {
+        if( grid == null || grid.length == 0) return 0;
+        int rowNums = grid.length;
+        int colNums = grid[0].length;
+        int islandNums = 0;
+        for(int i = 0; i < rowNums ; i ++){
+            for(int j = 0 ; j < colNums ; j ++){
+                if(grid[i][j] == '1'){
+                    islandNums++;
+                    dfs(grid,i,j,rowNums,colNums);
+                }
+            }
+        }
+        return islandNums;
+    }
+
+    private void dfs(char[][] grid, int row, int col, int numsRow, int numsCol){
+        // dieu kien dung
+        if(row < 0 || row >= numsRow || col < 0 || col >= numsCol || grid [row][col] == '0') return;
+        // action
+        grid[row][col]='0';
+        // recrusion
+        dfs(grid,row-1,col,numsRow,numsCol);
+        dfs(grid,row,col-1,numsRow,numsCol);
+        dfs(grid,row+1,col,numsRow,numsCol);
+        dfs(grid,row,col+1,numsRow,numsCol);
+    }
 
     public static void main(String[] args) {
 //        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
