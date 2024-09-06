@@ -72,6 +72,7 @@ public class CodilityPlayGround {
             for (int i = 0; i < levelSize; i++) {
                 String current = queue.poll();
                 System.out.println(current);
+                assert current != null;
                 if (current.equals(end)) {
                     return degree;
                 }
@@ -334,8 +335,8 @@ public class CodilityPlayGround {
 
     public static int[] productExceptSelf(int[] nums) {
         int n = nums.length;
-        int pre[] = new int[n];
-        int suff[] = new int[n];
+        int[] pre = new int[n];
+        int[] suff = new int[n];
         pre[0] = 1;
         suff[n - 1] = 1;
 
@@ -346,7 +347,7 @@ public class CodilityPlayGround {
             suff[i] = suff[i + 1] * nums[i + 1];
         }
 
-        int ans[] = new int[n];
+        int[] ans = new int[n];
         for(int i = 0; i < n; i++) {
             ans[i] = pre[i] * suff[i];
         }
@@ -500,7 +501,7 @@ public class CodilityPlayGround {
 
 //    https://leetcode.com/problems/valid-parentheses/
     public boolean isValid(String s) {
-        Stack<Character> parentheses = new Stack<Character>();
+        Stack<Character> parentheses = new Stack<>();
         if(s.length() == 1) return false;
         for(int i = 0 ; i < s.length(); i++){
             if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '['){
@@ -592,7 +593,7 @@ public class CodilityPlayGround {
         return result;
     }
 
-    public static int[] dailyTemperaturess(int[] temperatures) {
+    public static int[] dailyTemperature(int[] temperatures) {
         int[] result = new int[temperatures.length];
         Stack<Integer> stack = new Stack<>();
 
@@ -623,38 +624,70 @@ public class CodilityPlayGround {
         return islandNums;
     }
 
+    public static int solution2(String S) {
+        int n = S.length();
+        int totalA = 0;
+
+        // Count the total number of A's
+        for (int i = 0; i < n; i++) {
+            if (S.charAt(i) == 'A') {
+                totalA++;
+            }
+        }
+
+        int leftBCount = 0;
+        int rightACount = totalA;
+        int minDeletions = Integer.MAX_VALUE;
+
+        // Iterate through the string and calculate minimum deletions
+        for (int i = 0; i <= n; i++) {
+            minDeletions = Math.min(minDeletions, leftBCount + rightACount);
+
+            if (i < n) {
+                if (S.charAt(i) == 'B') {
+                    leftBCount++;
+                } else if (S.charAt(i) == 'A') {
+                    rightACount--;
+                }
+            }
+        }
+
+        return minDeletions;
+    }
+
     private void dfs(char[][] grid, int row, int col, int numsRow, int numsCol){
         // dieu kien dung
         if(row < 0 || row >= numsRow || col < 0 || col >= numsCol || grid [row][col] == '0') return;
         // action
         grid[row][col]='0';
-        // recrusion
+        // recursion
         dfs(grid,row-1,col,numsRow,numsCol);
         dfs(grid,row,col-1,numsRow,numsCol);
         dfs(grid,row+1,col,numsRow,numsCol);
         dfs(grid,row,col+1,numsRow,numsCol);
     }
 
+    public static int countHillValley(int[] nums) {
+        int hills = 0;
+        int valleys = 0;
+        int left = 0;
+        int n = nums.length;
+
+        for(int i = 1 ; i < n - 1 ; i++){
+            if( nums[left] < nums[i] && nums[i] > nums[i+1]) hills ++;
+            if(nums[left] > nums[i] && nums[i] < nums[i+1]) valleys++;
+            if(nums[i] == nums[left] && nums[i] < nums[i+1]) valleys++;
+            if(nums[i] != nums[left]) left = i;
+        }
+
+        if(nums[n-1] > nums[n-2]){
+            hills ++;
+
+        }
+        return hills + valleys;
+    }
+
     public static void main(String[] args) {
-//        String[] connections = {"fred:joe", "joe:mary", "mary:fred", "mary:bill"};
-//        String person1 = "fred";
-//        String person2 = "bill";
-//        int nums[]= {1,1,1,2,2,3};
-//        String result = "0P";
-//        System.out.print(isPalindrome(result));
-//        findKthLargest(new int[]{3, 2, 1, 5, 6, 4},2);
-//        System.out.print(longestCommonPrefix(new String []{"adc", "ac","accd"}));
-//        System.out.println(removeDuplicatesFromSortedArray2(nums));
-//        int result = degreesOfSeparation(connections, person1, person2);
-//          String[] rowDatas = {"1,Ben,0","2,Kate,1","3,Damien,2","4,Jane,1","5,Meng,4"};
-//          printOrganizeChart(rowDatas);
-//        System.out.println(calculateCastles(new int[]{2, 2, 3, 4, 3, 3, 2, 2, 1, 1, 2, 5}));
-//        System.out.println(fixPotholes("...xxx..x....xxx",7)); //5
-//        System.out.println(fixPotholes("..xxxxx",4)); // 3
-//        System.out.println(fixPotholes("...",14)); // 0
-//        System.out.println(isAnagram("rat","cat"));
-//        System.out.println(Arrays.toString(productExceptSelf(new int[]{1,2,3,4})));
-        dailyTemperaturess(new int[]{30,40,50,60});
-        System.out.println(true && true);
+
     }
 }
