@@ -667,24 +667,15 @@ public class CodilityPlayGround {
         dfs(grid,row,col+1,numsRow,numsCol);
     }
 
-    public static int countHillValley(int[] nums) {
-        int hills = 0;
-        int valleys = 0;
-        int left = 0;
-        int n = nums.length;
-
-        for(int i = 1 ; i < n - 1 ; i++){
-            if( nums[left] < nums[i] && nums[i] > nums[i+1]) hills ++;
-            if(nums[left] > nums[i] && nums[i] < nums[i+1]) valleys++;
-            if(nums[i] == nums[left] && nums[i] < nums[i+1]) valleys++;
-            if(nums[i] != nums[left]) left = i;
-        }
-
-        if(nums[n-1] > nums[n-2]){
-            hills ++;
-
-        }
-        return hills + valleys;
+    //https://leetcode.com/problems/count-hills-and-valleys-in-an-array/
+    public static int countHillValley(int[] a){
+        int r = 0, left = a[0];
+        for(int i = 1; i < a.length - 1; i++)
+            if(left < a[i] && a[i] > a[i + 1] || left > a[i] && a[i] < a[i + 1]){
+                r++;
+                left = a[i];
+            }
+        return r;
     }
 
     public static void main(String[] args) {
