@@ -38,4 +38,10 @@ class CodilityPlayGroundTest {
         int result = CodilityPlayGround.countHillValley(new int[]{6,2,2,1,1,3,1,1});
         assertEquals(4, result);
     }
+
+    @org.junit.jupiter.api.Test
+    void minDeletions() {
+//        int result = CodilityPlayGround.solution("AAABBBB");
+//        assertEquals(0, result);
+    }
 }

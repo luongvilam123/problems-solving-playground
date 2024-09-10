@@ -13,9 +13,9 @@ public class CodilityPlayGround {
     // format. Write a function that given a string S, returns the minimum
     // number of letters that need to be deleted from S in order to obtain
     // a string in the above format
-    //BBABABAB ->AAAB
+    //BBABABAB -> AAAB
 
-    public static int solution(String s) {
+    public static int minDeletions(String s) {
         int bCharacter = 0, validCharacter = 0;
 
         for (int i = 0 ; i< s.length(); i++) {
@@ -129,21 +129,8 @@ public class CodilityPlayGround {
     }
 
     public static int calculateCastles(int[] A) {
-        int borderSegment = A.length;
-        if (borderSegment == 0) return 0;
-        int result = 0;
-        int lastMinMaxHeight = A[0];
-        for(int idx = 1; idx < borderSegment - 1; idx++) {
-            if(((A[idx] - lastMinMaxHeight) * (A[idx + 1] - A[idx])) < 0) {
-                result++;
-                lastMinMaxHeight = A[idx];
-            }
-        }
-        if(result == 0){
-            if(A[0] == A[borderSegment-1]) return 1;
-            return 2;
-        }
-        return result + 2;
+
+        return 2;
     }
 
     public static int fixPotholes(String s, int B) {
