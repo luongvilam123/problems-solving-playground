@@ -128,10 +128,66 @@ public class CodilityPlayGround {
         return -1;
     }
 
-    public static int calculateCastles(int[] A) {
+    public static int codilityCalculateCastles(int[] A) {
+        int l = 0, r = 2, valley = 0, hill = 0;
+        int n = A.length;
+        if( n <= 1) return n;
 
-        return 2;
+        for(int i = 1; i < n-1; i++){
+
+            if(A[l] > A[i] && ( (A[i] < A[r]) || (A[r] == A[n-1]) )){
+                valley++;
+                l = i;
+                if(r < n-1) r++;
+                continue;
+            }
+
+            if(A[l] < A[i] && A[i] > A[r]){
+                hill++;
+                l = i;
+                if(r < n-1) r++;
+                continue;
+            }
+
+            if(r == i && r < n-1) r++;
+        }
+        if( A[0] > A[1] ) hill++;
+        if( A[n-1] > A[n-2] ) hill++;
+
+        return valley + hill;
     }
+
+    public static int solutionNumberCastles(int[] A) {
+        int n = A.length;
+        List<Integer> v = new ArrayList<>();
+
+        // a new array where continuous terrains and only 1 terrain will represent it
+        int last = A[0];
+        v.add(A[0]);
+
+        for (int i = 1; i < n; i++) {
+            if (A[i] == last) continue;
+            v.add(A[i]);
+            last = A[i];
+        }
+
+        int answer = 0;
+        n = v.size();
+
+        for (int i = 0; i < n; i++) {
+            if (i == 0 || i == n - 1) {
+                // edge
+                answer++;
+            } else if (v.get(i) > v.get(i - 1) && v.get(i) > v.get(i + 1)) { // hill
+                answer++;
+            } else if (v.get(i) < v.get(i - 1) && v.get(i) < v.get(i + 1)) { // valley
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+
 
     public static int fixPotholes(String s, int B) {
         int n = s.length();

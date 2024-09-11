@@ -23,20 +23,26 @@ class CodilityPlayGroundTest {
 //        System.out.println(solution("BAAABAB"));
     @org.junit.jupiter.api.Test
     void calculateCastles() {
-         int result = CodilityPlayGround.calculateCastles(new int[]{2, 2, 3, 4, 3, 3, 2, 2, 1,1,2,5});
+         int result = CodilityPlayGround.solutionNumberCastles(new int[]{2, 2, 3, 4, 3, 3, 2, 2, 1,1,2,5});
          assertEquals(4, result);
     }
 
     @org.junit.jupiter.api.Test
     void calculateCastles2() {
-        int result = CodilityPlayGround.countHillValley(new int[]{2, 2, 3, 4, 3, 3, 2, 2, 1,1,2,5});
-        assertEquals(4, result);
+        int result = CodilityPlayGround.solutionNumberCastles(new int[]{1,1,3,1,1});
+        assertEquals(3, result);
     }
 
     @org.junit.jupiter.api.Test
     void calculateCastles3() {
-        int result = CodilityPlayGround.countHillValley(new int[]{6,2,2,1,1,3,1,1});
+        int result = CodilityPlayGround.solutionNumberCastles(new int[]{6,2,2,1,1,3,1,1});
         assertEquals(4, result);
+    }
+
+    @org.junit.jupiter.api.Test
+    void calculateCastles4() {
+        int result = CodilityPlayGround.solutionNumberCastles(new int[]{5,2,2,5});
+        assertEquals(3, result);
     }
 
     @org.junit.jupiter.api.Test
