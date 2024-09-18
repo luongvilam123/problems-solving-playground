@@ -128,36 +128,8 @@ public class CodilityPlayGround {
         return -1;
     }
 
-    public static int codilityCalculateCastles(int[] A) {
-        int l = 0, r = 2, valley = 0, hill = 0;
-        int n = A.length;
-        if( n <= 1) return n;
 
-        for(int i = 1; i < n-1; i++){
-
-            if(A[l] > A[i] && ( (A[i] < A[r]) || (A[r] == A[n-1]) )){
-                valley++;
-                l = i;
-                if(r < n-1) r++;
-                continue;
-            }
-
-            if(A[l] < A[i] && A[i] > A[r]){
-                hill++;
-                l = i;
-                if(r < n-1) r++;
-                continue;
-            }
-
-            if(r == i && r < n-1) r++;
-        }
-        if( A[0] > A[1] ) hill++;
-        if( A[n-1] > A[n-2] ) hill++;
-
-        return valley + hill;
-    }
-
-    public static int solutionNumberCastles(int[] A) {
+    public static int codilityNumberCastles(int[] A) {
         int n = A.length;
         List<Integer> v = new ArrayList<>();
 
@@ -667,35 +639,20 @@ public class CodilityPlayGround {
         return islandNums;
     }
 
-    public static int solution2(String S) {
+    public static int minDeleted(String S) {
         int n = S.length();
-        int totalA = 0;
+        var deleted = 0 ;
+        var firstIndexOfA = S.indexOf('A');
+        var lastIndexOfA = S.lastIndexOf('A');
 
-        // Count the total number of A's
-        for (int i = 0; i < n; i++) {
-            if (S.charAt(i) == 'A') {
-                totalA++;
-            }
-        }
-
-        int leftBCount = 0;
-        int rightACount = totalA;
-        int minDeletions = Integer.MAX_VALUE;
-
-        // Iterate through the string and calculate minimum deletions
-        for (int i = 0; i <= n; i++) {
-            minDeletions = Math.min(minDeletions, leftBCount + rightACount);
-
-            if (i < n) {
-                if (S.charAt(i) == 'B') {
-                    leftBCount++;
-                } else if (S.charAt(i) == 'A') {
-                    rightACount--;
+        for(int i = 0; i < n; i ++ ) {
+            if( S.toCharArray()[i] == 'B') {
+                if (i < firstIndexOfA || i < lastIndexOfA) {
+                    deleted++;
                 }
             }
         }
-
-        return minDeletions;
+        return deleted;
     }
 
     private void dfs(char[][] grid, int row, int col, int numsRow, int numsCol){
