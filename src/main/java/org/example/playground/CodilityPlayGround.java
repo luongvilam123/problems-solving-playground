@@ -607,7 +607,7 @@ public class CodilityPlayGround {
         }
         return result;
     }
-
+    // https://leetcode.com/problems/daily-temperatures/
     public static int[] dailyTemperature(int[] temperatures) {
         int[] result = new int[temperatures.length];
         Stack<Integer> stack = new Stack<>();
