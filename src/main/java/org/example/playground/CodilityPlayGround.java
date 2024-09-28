@@ -677,8 +677,78 @@ public class CodilityPlayGround {
             }
         return r;
     }
+    // https://www.hackerrank.com/challenges/waiter/problem?isFullScreen=true
+    private static List<Integer> generatePrimes(int limit) {
+        boolean[] isPrime = new boolean[limit + 1];
+        List<Integer> primes = new ArrayList<>();
+        for (int i = 2; i <= limit; i++) {
+            isPrime[i] = true;
+        }
+
+        for (int p = 2; p * p <= limit; p++) {
+            if (isPrime[p]) {
+                for (int i = p * p; i <= limit; i += p) {
+                    isPrime[i] = false;
+                }
+            }
+        }
+
+        for (int p = 2; p <= limit; p++) {
+            if (isPrime[p]) {
+                primes.add(p);
+            }
+        }
+
+        return primes;
+    }
+
+    public static List<Integer> waiter(List<Integer> number, int q) {
+        List<Integer> result = new ArrayList<>();
+        Stack<Integer> A = new Stack<>();
+
+        // Push all elements into the stack A in reverse order
+        for (int i = 0 ; i < number.size(); i++) {
+            A.push(number.get(i));
+        }
+
+        // Generate a list of primes (use a large enough limit to generate at least q primes)
+        List<Integer> primes = generatePrimes(10000);
+
+        // Iterate over the number of rounds
+        for (int i = 0; i < q; i++) {
+            Stack<Integer> B = new Stack<>();
+            Stack<Integer> newA = new Stack<>();
+            int prime = primes.get(i);
+
+            // Process each element in the current stack A
+            while (!A.isEmpty()) {
+                int plate = A.pop();
+                if (plate % prime == 0) {
+                    B.push(plate);
+                } else {
+                    newA.push(plate);
+                }
+            }
+
+            // Add all elements from stack B to result (reverse order)
+            while (!B.isEmpty()) {
+                result.add(B.pop());
+            }
+
+            // The new stack A will be the remaining plates
+            A = newA;
+        }
+
+        // Add the remaining plates from A to the result (in reverse order)
+        while (!A.isEmpty()) {
+            result.add(A.pop());
+        }
+
+        return result;
+    }
+
 
     public static void main(String[] args) {
-
+        waiter(List.of(new Integer[]{2,3,4,5,6,7}), 3).forEach(System.out::println);
     }
 }
