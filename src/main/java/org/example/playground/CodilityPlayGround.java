@@ -747,6 +747,50 @@ public class CodilityPlayGround {
         return result;
     }
 
+    // https://www.hackerrank.com/challenges/bfsshortreach/problem?isFullScreen=true
+    public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) {
+        Map<Integer,List<Integer>> map = new HashMap<>();
+        Queue<Integer> queue = new LinkedList<>();
+        List<Integer> result = new ArrayList<>();
+
+        int [] distance = new int[n+1];
+        Arrays.fill(distance,0);
+
+
+        // create graph using Hashmap
+        for (int i = 0; i < m; i++) {
+            int first = edges.get(i).get(0);
+            int second = edges.get(i).get(1);
+            map.putIfAbsent(first, new ArrayList<>());
+            map.putIfAbsent(second, new ArrayList<>());
+
+            map.get(first).add(second);
+            map.get(second).add(first);
+        }
+        // Add start point
+        queue.add(s);
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+                for (Integer neighbor : map.getOrDefault(current,new ArrayList<>())) {
+                    if(distance[neighbor]== 0) {
+                        distance[neighbor] = distance[current] + 6;
+                        queue.add(neighbor);
+                    }
+                }
+        }
+
+        for(int i = 0 ; i < distance.length; i++){
+            if(distance[i] == 0){
+                distance[i] = -1;
+            }
+        }
+        for(int i = 1 ; i <= n; i++){
+            if(s!=i) result.add(distance[i]);
+        }
+        // Write your code here
+        return result;
+    }
+
 
     public static void main(String[] args) {
         waiter(List.of(new Integer[]{2,3,4,5,6,7}), 3).forEach(System.out::println);
