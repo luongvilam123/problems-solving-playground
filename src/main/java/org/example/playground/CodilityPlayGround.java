@@ -752,10 +752,10 @@ public class CodilityPlayGround {
         Map<Integer,List<Integer>> map = new HashMap<>();
         Queue<Integer> queue = new LinkedList<>();
         List<Integer> result = new ArrayList<>();
-
+        HashSet<Integer> visited = new HashSet<>();
+        // distance from start point to i
         int [] distance = new int[n+1];
         Arrays.fill(distance,0);
-
 
         // create graph using Hashmap
         for (int i = 0; i < m; i++) {
@@ -772,9 +772,10 @@ public class CodilityPlayGround {
         while (!queue.isEmpty()) {
             int current = queue.poll();
                 for (Integer neighbor : map.getOrDefault(current,new ArrayList<>())) {
-                    if(distance[neighbor]== 0) {
+                    if(!visited.contains(neighbor)) {
                         distance[neighbor] = distance[current] + 6;
                         queue.add(neighbor);
+                        visited.add(neighbor);
                     }
                 }
         }
@@ -785,7 +786,7 @@ public class CodilityPlayGround {
             }
         }
         for(int i = 1 ; i <= n; i++){
-            if(s!=i) result.add(distance[i]);
+            if(s!= i) result.add(distance[i]);
         }
         // Write your code here
         return result;
@@ -794,5 +795,6 @@ public class CodilityPlayGround {
 
     public static void main(String[] args) {
         waiter(List.of(new Integer[]{2,3,4,5,6,7}), 3).forEach(System.out::println);
+        bfs(5,3,List.of(List.of(1,2),List.of(1,3),List.of(3,4)),2);
     }
 }
