@@ -804,6 +804,28 @@ public class CodilityPlayGround {
 
         return root;
     }
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+    public static int maxProfit(int[] prices) {
+        int maxProfit = 0;
+        int todayProfit = 0;
+        int n = prices.length;
+        int left = 0;
+        int right = 1;
+        while (right < n) {
+            if (prices[left] < prices[right]){
+                todayProfit = prices[right] - prices[left];
+                right++;
+            } else {
+                left = right;
+                right ++;
+            }
+            if(todayProfit > maxProfit){
+                maxProfit = todayProfit;
+            }
+        }
+        return maxProfit;
+    }
+
     public static void main(String[] args) {
         waiter(List.of(new Integer[]{2,3,4,5,6,7}), 3).forEach(System.out::println);
         bfs(5,3,List.of(List.of(1,2),List.of(1,3),List.of(3,4)),2);
