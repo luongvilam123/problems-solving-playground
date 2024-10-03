@@ -825,6 +825,32 @@ public class CodilityPlayGround {
         }
         return maxProfit;
     }
+    // https://leetcode.com/problems/subsets/
+    public List<List<Integer>> subsets(int[] nums) {
+        List<Integer> subset = new ArrayList();
+        List<List<Integer>> results = new ArrayList();
+
+        backTracking(nums,0,subset,results);
+        return results;
+
+    }
+
+    void backTracking(int [] nums, int index,List<Integer> subset, List<List<Integer>> results){
+        // base case return if the subset length is equal to nums.length
+        if(index == nums.length){
+            results.add(new ArrayList<>(subset));
+            return;
+        }
+
+        // decision to add num
+        subset.add(nums[index]);
+        backTracking(nums,index + 1,subset,results);
+
+        //decision NOT to add num
+        subset.remove(subset.size()-1);
+        backTracking(nums,index +1,subset,results);
+    }
+
 
     public static void main(String[] args) {
         waiter(List.of(new Integer[]{2,3,4,5,6,7}), 3).forEach(System.out::println);
