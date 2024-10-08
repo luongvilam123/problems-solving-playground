@@ -851,6 +851,30 @@ public class CodilityPlayGround {
         backTracking(nums,index +1,subset,results);
     }
 
+    // https://leetcode.com/problems/permutations/
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList();
+        List<Integer> pemutation = new ArrayList();
+
+        backTrackingDfs(result,pemutation,nums);
+        return result;
+    }
+
+    void backTrackingDfs( List<List<Integer>> result,List<Integer> pemutation,int[] nums){
+        if(pemutation.size() == nums.length) {
+            result.add(new ArrayList(pemutation));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++){
+            if(pemutation.contains(nums[i])) continue;
+            pemutation.add(nums[i]);
+            backTrackingDfs( result,pemutation,nums);
+            pemutation.remove(pemutation.size()-1);
+        }
+
+
+    }
+
 
     public static void main(String[] args) {
         waiter(List.of(new Integer[]{2,3,4,5,6,7}), 3).forEach(System.out::println);
