@@ -871,7 +871,30 @@ public class CodilityPlayGround {
             backTrackingDfs( result,pemutation,nums);
             pemutation.remove(pemutation.size()-1);
         }
+    }
+    // https://leetcode.com/problems/subsets-ii/
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> result = new ArrayList();
+        List<Integer> subset = new ArrayList();
+        Arrays.sort(nums);
+        dfs(result,subset,0,nums);
+        return result;
+    }
+    void dfs(List<List<Integer>> result,List<Integer> subset, int index, int[] nums ){
+        if(index == nums.length){
+            if( result.contains(subset)) return;
+            else {
+                result.add(new ArrayList<>(subset));
+                return;
+            }
 
+        }
+
+        subset.add(nums[index]);
+        dfs(result,subset,index + 1,nums);
+
+        subset.remove(subset.size()-1);
+        dfs(result,subset,index + 1,nums);
 
     }
 
