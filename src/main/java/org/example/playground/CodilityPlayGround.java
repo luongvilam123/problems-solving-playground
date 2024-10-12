@@ -874,20 +874,16 @@ public class CodilityPlayGround {
     }
     // https://leetcode.com/problems/subsets-ii/
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        List<List<Integer>> result = new ArrayList();
-        List<Integer> subset = new ArrayList();
+        Set<List<Integer>> result = new HashSet<>();
+        List<Integer> subset = new ArrayList<>();
         Arrays.sort(nums);
         dfs(result,subset,0,nums);
-        return result;
+        return new ArrayList<>(result);
     }
-    void dfs(List<List<Integer>> result,List<Integer> subset, int index, int[] nums ){
+    void dfs(Set<List<Integer>> result,List<Integer> subset, int index, int[] nums ){
         if(index == nums.length){
-            if( result.contains(subset)) return;
-            else {
-                result.add(new ArrayList<>(subset));
-                return;
-            }
-
+            result.add(new ArrayList<>(subset));
+            return;
         }
 
         subset.add(nums[index]);
