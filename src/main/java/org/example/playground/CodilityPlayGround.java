@@ -910,6 +910,19 @@ public class CodilityPlayGround {
         }
         return -1;
     }
+        // https://leetcode.com/problems/reverse-linked-list/
+//        public ListNode reverseList(ListNode head) {
+//            ListNode newNode = null;
+//
+//            while(head != null){
+//                ListNode temp = head.next;
+//                head.next = newNode;
+//                newNode = head;
+//                head = temp;
+//            }
+//            return newNode;
+//        }
+
 
     public static void main(String[] args) {
         waiter(List.of(new Integer[]{2,3,4,5,6,7}), 3).forEach(System.out::println);
