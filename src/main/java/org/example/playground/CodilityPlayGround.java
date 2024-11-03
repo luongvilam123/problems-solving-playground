@@ -922,6 +922,55 @@ public class CodilityPlayGround {
 //            }
 //            return newNode;
 //        }
+    //spam Detection Emails Hackerrank Test
+    public static List<String> getSpamEmails(List<String> subjects, List<String> spam_words) {
+        List<String> results = new ArrayList<>();
+
+
+        List<String> spamWords = new ArrayList<>();
+        for (String word : spam_words) {
+            spamWords.add(word.toLowerCase());
+        }
+
+        for (String subject : subjects) {
+            String[] subjectWords = subject.toLowerCase().split("\\s+");
+            int spamWordCount = 0;
+
+            for (String word : subjectWords) {
+                if (spamWords.contains(word)) {
+                    spamWordCount++;
+                }
+            }
+
+            results.add(spamWordCount >= 2 ? "spam" : "not_spam");
+        }
+        return results;
+    }
+
+    public static int collision(List<Integer> speed, int pos) {
+        int collisions = 0;
+        int n = speed.size();
+        int particleSpeed = speed.get(pos);
+
+        for(int i = pos +1; i < n; i ++){
+            if(particleSpeed > speed.get(i)){
+                collisions++;
+            }
+
+        }
+
+        for( int i = 0; i <pos; i++){
+            if(speed.get(i) > particleSpeed){
+                collisions++;
+            }
+        }
+
+        return collisions;
+    }
+
+
+
+
 
 
     public static void main(String[] args) {
