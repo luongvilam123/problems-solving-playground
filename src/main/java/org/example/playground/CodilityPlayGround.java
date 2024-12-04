@@ -661,10 +661,14 @@ public class CodilityPlayGround {
         // action
         grid[row][col]='0';
         // recursion
-        dfs(grid,row-1,col,numsRow,numsCol);
-        dfs(grid,row,col-1,numsRow,numsCol);
-        dfs(grid,row+1,col,numsRow,numsCol);
-        dfs(grid,row,col+1,numsRow,numsCol);
+        if( row > 0 && grid[row-1][col] == '1')
+            dfs(grid,row -1,col,numsRow,numsCol);
+        if( row + 1 < numsRow && grid[row+1][col] == '1')
+            dfs(grid,row +1,col,numsRow,numsCol);
+        if( col + 1 < numsCol && grid[row][col+1] == '1')
+            dfs(grid,row,col+1,numsRow,numsCol);
+        if( col > 0 && grid[row][col-1] == '1')
+            dfs(grid,row,col-1,numsRow,numsCol);
     }
 
     //https://leetcode.com/problems/count-hills-and-valleys-in-an-array/
