@@ -638,7 +638,24 @@ public class CodilityPlayGround {
         }
         return islandNums;
     }
+    // https://leetcode.com/problems/max-area-of-island/description/
+    public  int maxAreaOfIsland(int[][] grid) {
+        if( grid == null || grid.length == 0) return 0;
+        int maxArea = 0;
+        int rowNums = grid.length;
+        int colNums = grid[0].length;
 
+        for(int i = 0; i < rowNums ; i ++){
+            for(int j = 0 ; j < colNums ; j ++){
+                if(grid[i][j] == 1){
+                    int area = dfsMaxArea(grid,i,j,rowNums,colNums);
+                    if( maxArea < area) maxArea = area;
+                }
+            }
+        }
+
+        return maxArea;
+    }
     public static int minDeleted(String S) {
         int n = S.length();
         var deleted = 0 ;
@@ -669,6 +686,24 @@ public class CodilityPlayGround {
             dfs(grid,row,col+1,numsRow,numsCol);
         if( col > 0 && grid[row][col-1] == '1')
             dfs(grid,row,col-1,numsRow,numsCol);
+    }
+
+    private int dfsMaxArea(int[][] grid, int row, int col, int numsRow, int numsCol){
+        // dieu kien dung
+        if(row < 0 || row >= numsRow || col < 0 || col >= numsCol || grid [row][col] == 0) return 0;
+        // action
+        grid[row][col] = 0;
+        int count = 1 ;
+        // recursion
+        if( row > 0 && grid[row-1][col] == 1)
+            count = count + dfsMaxArea(grid,row -1,col,numsRow,numsCol);
+        if( row + 1 < numsRow && grid[row+1][col] == 1)
+            count = count + dfsMaxArea(grid,row +1,col,numsRow,numsCol);
+        if( col + 1 < numsCol && grid[row][col+1] == 1)
+            count = count + dfsMaxArea(grid,row,col+1,numsRow,numsCol);
+        if( col > 0 && grid[row][col-1] == 1)
+            count = count + dfsMaxArea(grid,row,col-1,numsRow,numsCol);
+        return count;
     }
 
     //https://leetcode.com/problems/count-hills-and-valleys-in-an-array/
